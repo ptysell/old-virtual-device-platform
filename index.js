@@ -69,6 +69,7 @@ VirturalDevicePlatform.prototype = {
 function VirturalDeviceAccessory(log, device) {
 	this.log = log;
 	this.name = device["name"];
+	  this._state = false;
 	
 	console.log(this.name + " = " + "Test");
 	
@@ -112,7 +113,15 @@ VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
   this.log("Setting [Accessory] : " + this.name.replace(/\s/g, '_') + " to " + on);
   //this.accessoryacation._setOn2(on);
   this.log("Accessory Action Name : " + this.accessoryaction.name);
-  this.accessoryaction._service.setCharacteristic(Characteristic.On, on);
+  
+    this._state = on;
+    
+    if (this._state != accessoryaction._state) {
+      this.accessoryaction._service.setCharacteristic(Characteristic.On, on);
+    }
+  
+  
+
   this.storage.setItemSync(this.name, on);
   callback();
 	
