@@ -1,4 +1,4 @@
-
+"use strict";
 
 var Service, Characteristic, HomebridgeAPI;
 const { HomebridgeVDPVersion } = require('./package.json');
@@ -110,7 +110,9 @@ VirturalDeviceAccessory.prototype.getServices = function() {
 VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
 
   this.log("Setting [Accessory] : " + this.name.replace(/\s/g, '_') + " to " + on);
-  this.accessoryacation._setOn2(on);
+  //this.accessoryacation._setOn2(on);
+  this.log("Accessory Action Name : " + this.accessoryaction.name);
+  this.log("Accessory Action Service Test : " + this.accessoryaction._service.getCharacteristic(Characteristic.On));
   this.storage.setItemSync(this.name, on);
   callback();
 	
@@ -191,13 +193,7 @@ VirturalDeviceAccessoryAction.prototype._setOn = function(on, callback) {
     this.storage.setItemSync(this.name, on);
     }
 	
-VirturalDeviceAccessoryAction.prototype._setOn2 = function(on, callback) {
 
-  this.log("Setting [Accessory] : " + this.name.replace(/\s/g, '_') + " to " + on);
-  this.storage.setItemSync(this.name, on);
-  callback();
-	
-}	
 	
 this.accessory._service.setCharacteristic(Characteristic.On, this._state);
 	
