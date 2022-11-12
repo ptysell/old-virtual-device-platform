@@ -1,29 +1,43 @@
 {
-    "pluginAlias": "VirturalDevicePlatform",
-    "pluginType": "platform",
-    "singular": false,
-    "schema": {
-        "type": "object",
-        "properties": {
-            "name": {
-                "title": "Name",
-                "type": "string",
-                "required": true
-                }, 
-            "devices": {
-                "type": "array",
-                "items": {
-                    "title": "Accessory",
-                    "type": "object",
-                    "properties": {
-                        "name" : {
-                          "title" : "Name",
-                          "type" : "string",
-                          "required" : true
-                        }
-                    }
-                }
-            }
-            }
-        }
-    }
+	"pluginAlias": "VirturalDevicePlatform",
+	"pluginType": "platform",
+	"singular": false,
+	"schema": {
+		"type": "object",
+		"properties": {
+			"name": {
+				"title": "Name",
+				"type": "string",
+				"required": true
+			},
+			"zones": {
+				"type": "array",
+				"items": {
+					"title": "Accessory Zone",
+					"type": "object",
+					"properties": {
+						"name": {
+							"title": "Name",
+							"type": "string",
+							"required": true
+						},
+						"accessories": {
+							"type": "array",
+							"items": {
+								"title": "Accessory",
+								"type": "object",
+								"properties": {
+									"name": {
+										"title": "Name",
+										"type": "string",
+										"required": true
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
