@@ -178,11 +178,13 @@ VirturalDeviceAccessoryAction.prototype._setOn = function(on, callback) {
   if (on && this._state){
     this.log("Setting [Accessory Action] : " + this.name.replace(/\s/g, '_') + " from " + on + " to " + !on);
     setTimeout(() => {
-      this._service.setCharacteristic(Characteristic.On, false)  
+      this._service.setCharacteristic(Characteristic.On, false),
+      this.accessory.getServices.setCharacteristic(Characteristic.On, false)  
       }, 100);
     } 
   else {
     this._state = on;
+    
 	      this.log("Setting [Accessory Action] : " + this.name.replace(/\s/g, '_') + " from " + on + " to " + !on);
     this.storage.setItemSync(this.name, on);
     }
