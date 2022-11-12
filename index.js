@@ -36,7 +36,7 @@ VirturalDevicePlatform.prototype = {
 				this.devices[index]);
 			var accessoryaction  = new VirturalDeviceAccessoryAction(
 				this.log, 
-				this.devices[index].name, accessory);
+				this.devices[index].name);
 			
 			foundAccessories.push(accessory);
 			foundAccessories.push(accessoryaction);
@@ -130,15 +130,14 @@ VirturalDeviceAccessory.prototype.getServices = function() {
 //---------------------------------------------------------------------------------------
 
 
-function VirturalDeviceAccessoryAction(log, name, accessory) {
+function VirturalDeviceAccessoryAction(log, name) {
 	
   this.log = log;
   this.name = name + " Accessory Action";
-  this.targetaccessory = accessory;
   this._service = new Service.Switch(this.name);
   this._state = false;
   
-  this.log("TEST REGISTRATION ACCESSORY ACTION PARENT : " + targetaccessory.name);
+  this.log("TEST REGISTRATION ACCESSORY ACTION PARENT : " + "DELETED");
     
   
   this.informationService = new Service.AccessoryInformation();
