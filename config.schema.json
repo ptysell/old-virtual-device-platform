@@ -1,5 +1,5 @@
 {
-    "pluginAlias": "VirturalDevicePlatform",
+    "pluginAlias": "VirtualDevicePlatform",
     "pluginType": "platform",
     "singular": false,
     "schema": {
