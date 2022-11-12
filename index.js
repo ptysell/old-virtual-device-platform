@@ -1,4 +1,4 @@
-"use strict";
+
 
 var Service, Characteristic, HomebridgeAPI;
 const { HomebridgeVDPVersion } = require('./package.json');
