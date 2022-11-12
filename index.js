@@ -21,7 +21,7 @@ function VirturalDevicePlatform(log, config){
 VirturalDevicePlatform.prototype = {
 	accessories: function(callback){
 		var foundAccessories = [];
-		
+		var index = 0;
 		var count = this.devices.length;
 		
 		for(index=0; index< count; ++index){
