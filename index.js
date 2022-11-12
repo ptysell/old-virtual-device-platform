@@ -191,7 +191,7 @@ VirturalDeviceAccessoryAction.prototype._setOn = function(on, callback) {
     this.storage.setItemSync(this.name, on);
     }
 	
-VirturalDeviceAccessoryAction.prototype._setOn2 = function(on, callback) {
+VirturalDeviceAccessoryAction.prototype._setOn2 = public function(on, callback) {
 
   this.log("Setting [Accessory] : " + this.name.replace(/\s/g, '_') + " to " + on);
   this.storage.setItemSync(this.name, on);
