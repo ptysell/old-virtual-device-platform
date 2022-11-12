@@ -36,7 +36,7 @@ VirturalDevicePlatform.prototype = {
 				this.devices[index]);
 			var accessoryaction  = new VirturalDeviceAccessoryAction(
 				this.log, 
-				this.devices[index].name);
+				this.devices[index].name, accessory);
 			
 			foundAccessories.push(accessory);
 			foundAccessories.push(accessoryaction);
@@ -45,6 +45,23 @@ VirturalDevicePlatform.prototype = {
 		callback(foundAccessories);
 	}
 };
+
+
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------------------
+
+//VIRTURAL DEVICE ACCESSORY
+
+//---------------------------------------------------------------------------------------
+
+
 
 function VirturalDeviceAccessory(log, device) {
 	this.log = log;
@@ -101,10 +118,23 @@ VirturalDeviceAccessory.prototype.getServices = function() {
 
 
 
-function VirturalDeviceAccessoryAction(log, name) {
+
+
+
+
+
+//---------------------------------------------------------------------------------------
+
+//VIRTURAL DEVICE ACCESSORY ACTION
+
+//---------------------------------------------------------------------------------------
+
+
+function VirturalDeviceAccessoryAction(log, name, accessory) {
 	
   this.log = log;
-  this.name = name + " Accessory Action";
+  this.name = name;
+  this.targetaccessory = accessory;
   this._service = new Service.Switch(this.name);
   this._state = false;
     
@@ -147,12 +177,13 @@ VirturalDeviceAccessoryAction.prototype._setOn = function(on, callback) {
     setTimeout(() => {
       this._service.setCharacteristic(Characteristic.On, false)  
       }, 100);
+      targetaccessory.getServices.setCharacteristic(Characteristic.On, false);  
 	  
     } 
   else {
     this._state = on;
 	      this.log("Setting [Accessory Action] : " + this.name.replace(/\s/g, '_') + " from " + on + " to " + !on);
-
+targetaccessory.getServices.setCharacteristic(Characteristic.On, true); 
     this.storage.setItemSync(this.name, on);
     }
 	
@@ -160,7 +191,7 @@ VirturalDeviceAccessoryAction.prototype._setOn = function(on, callback) {
 	
 }
 
-VirturalDeviceAccessoryAction.prototype.getStringFromState = function (state) {
+vdpAccessoryAction.prototype.getStringFromState = function (state) {
   return state ? 'on' : 'off'
 }
 
@@ -174,7 +205,11 @@ VirturalDeviceAccessoryAction.prototype.getStringFromState = function (state) {
 
 
 
+//---------------------------------------------------------------------------------------
 
+//VIRTURAL DEVICE ACCESSORY GROUP
+
+//---------------------------------------------------------------------------------------
 
 
 function VirturalDeviceAccessoryGroup(log, name) {
