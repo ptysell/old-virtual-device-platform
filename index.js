@@ -8,33 +8,33 @@ module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   HomebridgeAPI = homebridge;
-  homebridge.registerPlatform("homebridge-virtual-device-platform", "VirturalDevicePlatform", VirturalDevicePlatform);
+  homebridge.registerPlatform("homebridge-virtual-device-platform", "VirtualDevicePlatform", VirtualDevicePlatform);
 
 }
 
-function VirturalDevicePlatform(log, config){
+function VirtualDevicePlatform(log, config){
 	this.log = log;
   this.name = config.name;
   this.devices = config["devices"];
   
 }
 
-VirturalDevicePlatform.prototype = {
+VirtualDevicePlatform.prototype = {
 	accessories: function(callback){
 		var foundAccessories = [];
 		var index = 0;
 		var count = this.devices.length;
 		
-		var accessorygroup  = new VirturalDeviceAccessoryGroup(
+		var accessorygroup  = new VirtualDeviceAccessoryGroup(
 				this.log, 
 				this.name);
 		
 		foundAccessories.push(accessorygroup);
 		for(index=0; index< count; ++index){
-			var accessory  = new VirturalDeviceAccessory(
+			var accessory  = new VirtualDeviceAccessory(
 				this.log, 
 				this.devices[index]);
-			var accessoryaction  = new VirturalDeviceAccessoryAction(
+			var accessoryaction  = new VirtualDeviceAccessoryAction(
 				this.log, 
 				this.devices[index].name, accessory);
 			
@@ -60,13 +60,13 @@ VirturalDevicePlatform.prototype = {
 
 //---------------------------------------------------------------------------------------
 
-//VIRTURAL DEVICE ACCESSORY
+//Virtual VIRTURAL DEVICE ACCESSORY
 
 //---------------------------------------------------------------------------------------
 
 
 
-function VirturalDeviceAccessory(log, device) {
+function VirtualDeviceAccessory(log, device) {
 	this.log = log;
 	this.name = device["name"];
 	  this._state = false;
@@ -102,13 +102,13 @@ function VirturalDeviceAccessory(log, device) {
 	
 }
 
-VirturalDeviceAccessory.prototype.getServices = function() {
+VirtualDeviceAccessory.prototype.getServices = function() {
 	
   return [this.informationService, this._service];
 	
 }
 
-VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
+VirtualDeviceAccessory.prototype._setOn = function(on, callback) {
 
   this.log("Setting [Accessory] : " + this.name.replace(/\s/g, '_') + " from " + !on + " to " + on);
 
@@ -125,7 +125,7 @@ VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
 	
 }
 
-VirturalDeviceAccessory.prototype.setAccessoryAction = function(accessoryaction) {
+VirtualDeviceAccessory.prototype.setAccessoryAction = function(accessoryaction) {
 	
   this.accessoryaction = accessoryaction;
 	
@@ -145,7 +145,7 @@ VirturalDeviceAccessory.prototype.setAccessoryAction = function(accessoryaction)
 //---------------------------------------------------------------------------------------
 
 
-function VirturalDeviceAccessoryAction(log, name, accessory) {
+function VirtualDeviceAccessoryAction(log, name, accessory) {
 	
   this.log = log;
   this.name = name + " Accessory Action";
@@ -179,13 +179,13 @@ function VirturalDeviceAccessoryAction(log, name, accessory) {
 	
 }
 
-VirturalDeviceAccessoryAction.prototype.getServices = function() {
+VirtualDeviceAccessoryAction.prototype.getServices = function() {
 	
   return [this.informationService, this._service];
 	
 }
 
-VirturalDeviceAccessoryAction.prototype._setOn = function(on, callback) {
+VirtualDeviceAccessoryAction.prototype._setOn = function(on, callback) {
 
   if (on && this._state){
     this.log("Setting [Accessory Action] : " + this.name.replace(/\s/g, '_') + " from " + !on + " to " + on);
@@ -208,7 +208,7 @@ this.accessory._service.setCharacteristic(Characteristic.On, this._state);
 	
 }
 
-VirturalDeviceAccessoryAction.prototype.getStringFromState = function (state) {
+VirtualDeviceAccessoryAction.prototype.getStringFromState = function (state) {
   return state ? 'on' : 'off'
 }
 
@@ -229,7 +229,7 @@ VirturalDeviceAccessoryAction.prototype.getStringFromState = function (state) {
 //---------------------------------------------------------------------------------------
 
 
-function VirturalDeviceAccessoryGroup(log, name) {
+function VirtualDeviceAccessoryGroup(log, name) {
 	
   this.log = log;
   this.name = name + 'Accessory Group';
@@ -261,13 +261,13 @@ function VirturalDeviceAccessoryGroup(log, name) {
 	
 }
 
-VirturalDeviceAccessoryGroup.prototype.getServices = function() {
+VirtualDeviceAccessoryGroup.prototype.getServices = function() {
 	
   return [this.informationService, this._service];
 	
 }
 
-VirturalDeviceAccessoryGroup.prototype._setOn = function(on, callback) {
+VirtualDeviceAccessoryGroup.prototype._setOn = function(on, callback) {
 
   this.log("Setting [Accessory Group] : " + this.name.replace(/\s/g, '_') + " to " + on);
   this.storage.setItemSync(this.name, on);
