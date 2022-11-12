@@ -13,7 +13,6 @@
             "devices": {
                 "type": "array",
                 "items": {
-                    {
                     "title": "Accessory",
                     "type": "object",
                     "properties": {
