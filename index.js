@@ -111,13 +111,10 @@ VirturalDeviceAccessory.prototype.getServices = function() {
 VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
 
   this.log("Setting [Accessory] : " + this.name.replace(/\s/g, '_') + " from " + !on + " to " + on);
-  //this.accessoryacation._setOn2(on);
-  this.log("Accessory Action Name : " + this.accessoryaction.name);
-  
+
     this._state = on;
     
     if (this._state != this.accessoryaction._state) {
-    this.log("HIT");
       this.accessoryaction._service.setCharacteristic(Characteristic.On, on);
     }
   
@@ -237,7 +234,7 @@ function VirturalDeviceAccessoryGroup(log, name) {
   this.log = log;
   this.name = name + 'Accessory Group';
  
-   this._service = new Service.Switch(this.name);
+   this._service = new Service.Fan(this.name);
       
   this.informationService = new Service.AccessoryInformation();
   this.informationService
