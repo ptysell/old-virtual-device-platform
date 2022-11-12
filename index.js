@@ -65,6 +65,25 @@ function VirturalDeviceAccessory(log, device) {
 }
 
 VirturalDeviceAccessory.prototype.setState = function(state, callback) {
-	this.log.info("Getting current state...");
+	this.log.info("Get State Funciton");
 	
 }
+
+VirturalDeviceAccessory.prototype.processEventData = function(e){
+	this.log.info("Process Event Data Function");	
+}
+
+VirturalDeviceAccessory.prototype.getDefaultValue = function(callback) {
+	this.log.info("Get Default Value Function");
+	callback(null, this.value);
+}
+
+VirturalDeviceAccessory.prototype.setCurrentValue = function(value, callback) {
+	this.log.info("Set Current Value Function");
+}
+
+VirturalDeviceAccessory.prototype.getServices = function() {
+	this.log.info("Get Services Function");
+	return this.services;
+}
+
