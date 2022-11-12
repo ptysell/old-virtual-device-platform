@@ -69,49 +69,45 @@ function VirturalDeviceAccessory(log, device) {
 	
 	console.log(this.name + " = " + "Test");
 	
-	this.services = [];
-	
-	this.informationService = new Service.AccessoryInformation();
-
-	this.informationService
-		.setCharacteristic(Characteristic.Manufacturer, "Virtural Device Platform")
-		.setCharacteristic(Characteristic.Model, "Accessory")
-		.setCharacteristic(Characteristic.SerialNumber, "AA098BB09");
-		
-		this.services.push(this.informationService);
+	 this._service = new Service.Lightbulb(this.name);
+      
+  this.informationService = new Service.AccessoryInformation();
+  this.informationService
+      .setCharacteristic(Characteristic.Manufacturer, 'Virtual Device Platform')
+      .setCharacteristic(Characteristic.Model, 'Accessory')
+      .setCharacteristic(Characteristic.FirmwareRevision, HomebridgeVDPVersion)
+      .setCharacteristic(Characteristic.SerialNumber, 'VDPAccessory_' + this.name.replace(/\s/g, '_'));
   
-
-		this.lightService = new Service.Lightbulb(this.name);
-		
-		this.lightService
-			.getCharacteristic(Characteristic.On)
-			.on('set', this.setState.bind(this));
-			
-		this.services.push(this.lightService);
-
-}
-
-VirturalDeviceAccessory.prototype.setState = function(state, callback) {
-	this.log.info("Get State Funciton");
+  this.cacheDirectory = HomebridgeAPI.user.persistPath();
+  this.storage = require('node-persist');
+  this.storage.initSync({dir:this.cacheDirectory, forgiveParseErrors: true});	
 	
-}
-
-VirturalDeviceAccessory.prototype.processEventData = function(e){
-	this.log.info("Process Event Data Function");	
-}
-
-VirturalDeviceAccessory.prototype.getDefaultValue = function(callback) {
-	this.log.info("Get Default Value Function");
-	callback(null, this.value);
-}
-
-VirturalDeviceAccessory.prototype.setCurrentValue = function(value, callback) {
-	this.log.info("Set Current Value Function");
+	
+  this._service.getCharacteristic(Characteristic.On)
+    .on('set', this._setOn.bind(this));
+	
+  var cachedState = this.storage.getItemSync(this.name);
+  if((cachedState === undefined) || (cachedState === false)) {
+    this._service.setCharacteristic(Characteristic.On, false);
+    } 
+  else {
+    this._service.setCharacteristic(Characteristic.On, true);
+    }
+	
 }
 
 VirturalDeviceAccessory.prototype.getServices = function() {
-	this.log.info("Get Services Function");
-	return this.services;
+	
+  return [this.informationService, this._service];
+	
+}
+
+VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
+
+  this.log("Setting [Accessory] : " + this.name.replace(/\s/g, '_') + " to " + on);
+  this.storage.setItemSync(this.name, on);
+  callback();
+	
 }
 
 
@@ -179,7 +175,7 @@ VirturalDeviceAccessoryAction.prototype._setOn = function(on, callback) {
     this.log("Setting [Accessory Action] : " + this.name.replace(/\s/g, '_') + " from " + on + " to " + !on);
     setTimeout(() => {
       this._service.setCharacteristic(Characteristic.On, false),
-      this.accessory.getServices.setCharacteristic(Characteristic.On, false)  
+      this.accessory.setCharacteristic(Characteristic.On, false)  
       }, 100);
     } 
   else {
