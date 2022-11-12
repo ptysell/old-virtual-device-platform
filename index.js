@@ -38,6 +38,9 @@ VirturalDevicePlatform.prototype = {
 				this.log, 
 				this.devices[index].name, accessory);
 			
+			accessory.setAccessoryAction(accessoryaction);
+			
+			
 			foundAccessories.push(accessory);
 			foundAccessories.push(accessoryaction);
 		}
@@ -70,6 +73,8 @@ function VirturalDeviceAccessory(log, device) {
 	console.log(this.name + " = " + "Test");
 	
 	 this._service = new Service.Lightbulb(this.name);
+	 
+	 this.accessoryaction = "";
       
   this.informationService = new Service.AccessoryInformation();
   this.informationService
@@ -110,7 +115,12 @@ VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
 	
 }
 
-
+VirturalDeviceAccessory.prototype.setAccessoryAction = function(accessoryaction) {
+	
+  this.accessoryaction = accessoryaction;
+  console.log("Set Accessory Action : " + accessoryaction.name);
+	
+}
 
 
 
