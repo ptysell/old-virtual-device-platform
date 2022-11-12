@@ -133,10 +133,12 @@ VirturalDeviceAccessory.prototype.getServices = function() {
 function VirturalDeviceAccessoryAction(log, name, accessory) {
 	
   this.log = log;
-  this.name = name + "Accessory Action";
+  this.name = name + " Accessory Action";
   this.targetaccessory = accessory;
   this._service = new Service.Switch(this.name);
   this._state = false;
+  
+  this.log("TEST REGISTRATION ACCESSORY ACTION PARENT : " + targetaccessory.name);
     
   
   this.informationService = new Service.AccessoryInformation();
@@ -177,13 +179,10 @@ VirturalDeviceAccessoryAction.prototype._setOn = function(on, callback) {
     setTimeout(() => {
       this._service.setCharacteristic(Characteristic.On, false)  
       }, 100);
-      targetaccessory.getServices.setCharacteristic(Characteristic.On, false);  
-	  
     } 
   else {
     this._state = on;
 	      this.log("Setting [Accessory Action] : " + this.name.replace(/\s/g, '_') + " from " + on + " to " + !on);
-targetaccessory.getServices.setCharacteristic(Characteristic.On, true); 
     this.storage.setItemSync(this.name, on);
     }
 	
