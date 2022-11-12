@@ -29,8 +29,12 @@ VirturalDevicePlatform.prototype = {
 			var accessory  = new VirturalDeviceAccessory(
 				this.log, 
 				this.devices[index]);
+			var accessoryaction  = new VirturalDeviceAccessoryAction(
+				this.log, 
+				this.devices[index].name);
 			
 			foundAccessories.push(accessory);
+			foundAccessories.push(accessoryaction);
 		}
 		
 		callback(foundAccessories);
@@ -40,9 +44,6 @@ VirturalDevicePlatform.prototype = {
 function VirturalDeviceAccessory(log, device) {
 	this.log = log;
 	this.name = device["name"];
-	
-	this.accessoryaction = new VirturalDeviceAccessoryAction(this.log, this.name);
-	push(this.accessoryaction);
 	
 	console.log(this.name + " = " + "Test");
 	
