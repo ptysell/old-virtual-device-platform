@@ -9,6 +9,7 @@ module.exports = function(homebridge) {
   Characteristic = homebridge.hap.Characteristic;
   HomebridgeAPI = homebridge;
   homebridge.registerPlatform("homebridge-virtual-device-platform", "VirturalDevicePlatform", VirturalDevicePlatform);
+
 }
 
 function VirturalDevicePlatform(log, config){
@@ -96,7 +97,7 @@ VirturalDeviceAccessory.prototype.getServices = function() {
 function VirturalDeviceAccessoryAction(log, name) {
 	
   this.log = log;
-  this.name = name = " Accessory Action";
+  this.name = name + " Accessory Action";
   this._service = new Service.Switch(this.name);
   this._state = false;
     
