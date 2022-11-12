@@ -1,11 +1,11 @@
 {
-  "name": "homebridge-virtural-device-platform",
+  "name": "homebridge-virtual-device-platform",
   "version": "0.0.1",
   "description": "",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ptysell/virtural-device-platform"
+    "url": "https://github.com/ptysell/virtual-device-platform"
   },
   "keywords": [
     "homebridge-plugin"
