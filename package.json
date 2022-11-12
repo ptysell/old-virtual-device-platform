@@ -1,6 +1,6 @@
 {
   "name": "homebridge-virtural-device-platform",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "",
   "license": "ISC",
   "repository": {
@@ -15,8 +15,6 @@
     "homebridge": ">=0.2.0"
   },
   "dependencies": {
-     "node-persist": "^2.1.0",
-    "request": "^2.65.0",
-    "eventsource": ""
+     "node-persist": "^2.1.0"
   }
 }
