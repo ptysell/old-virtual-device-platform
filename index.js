@@ -42,6 +42,7 @@ function VirturalDeviceAccessory(log, device) {
 	this.name = device["name"];
 	
 	this.accessoryaction = new VirturalDeviceAccessoryAction(this.log, this.name);
+	push(this.accessoryaction);
 	
 	console.log(this.name + " = " + "Test");
 	
