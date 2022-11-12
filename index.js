@@ -191,7 +191,7 @@ targetaccessory.getServices.setCharacteristic(Characteristic.On, true);
 	
 }
 
-vdpAccessoryAction.prototype.getStringFromState = function (state) {
+VirturalDeviceAccessoryAction.prototype.getStringFromState = function (state) {
   return state ? 'on' : 'off'
 }
 
