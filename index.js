@@ -116,7 +116,7 @@ VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
   
     this._state = on;
     
-    if (this._state != accessoryaction._state) {
+    if (this._state != this.accessoryaction._state) {
       //this.accessoryaction._service.setCharacteristic(Characteristic.On, on);
       this.log("HIT");
     }
