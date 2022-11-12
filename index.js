@@ -133,7 +133,7 @@ VirturalDeviceAccessory.prototype.getServices = function() {
 function VirturalDeviceAccessoryAction(log, name, accessory) {
 	
   this.log = log;
-  this.name = name;
+  this.name = name + "Accessory Action";
   this.targetaccessory = accessory;
   this._service = new Service.Switch(this.name);
   this._state = false;
@@ -215,7 +215,7 @@ VirturalDeviceAccessoryAction.prototype.getStringFromState = function (state) {
 function VirturalDeviceAccessoryGroup(log, name) {
 	
   this.log = log;
-  this.name = name;
+  this.name = name + 'Accessory Group';
  
    this._service = new Service.Switch(this.name);
       
