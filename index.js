@@ -110,7 +110,7 @@ VirturalDeviceAccessory.prototype.getServices = function() {
 VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
 
   this.log("Setting [Accessory] : " + this.name.replace(/\s/g, '_') + " to " + on);
-  console.log("Test Accessory Action : " + accessoryaction.name);
+  console.log("Test Accessory Action : " + this.accessoryaction.name);
   //this.accessoryacation.getServices().setCharacteristic(Characteristic.On, on);
   this.storage.setItemSync(this.name, on);
   callback();
@@ -120,7 +120,7 @@ VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
 VirturalDeviceAccessory.prototype.setAccessoryAction = function(accessoryaction) {
 	
   this.accessoryaction = accessoryaction;
-  console.log("Set Accessory Action : " + accessoryaction._service);
+  console.log("Set Accessory Action : " + this.accessoryaction.name);
 	
 }
 
