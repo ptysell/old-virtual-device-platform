@@ -134,11 +134,12 @@ function VirturalDeviceAccessoryAction(log, name, accessory) {
 	
   this.log = log;
   this.name = name + " Accessory Action";
-  this.targetaccessory = accessory;
   this._service = new Service.Switch(this.name);
   this._state = false;
   
-  this.log("TEST REGISTRATION ACCESSORY ACTION PARENT : " + targetaccessory.name);
+  this.accessory = accessory;
+  
+  this.log("TEST REGISTRATION ACCESSORY ACTION PARENT : " + accessory.name);
     
   
   this.informationService = new Service.AccessoryInformation();
