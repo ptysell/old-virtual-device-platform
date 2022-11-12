@@ -12,14 +12,74 @@ module.exports = function(homebridge) {
 
 }
 
+
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------------------
+
+//VIRTURAL DEVICE PLATFORM
+
+//---------------------------------------------------------------------------------------
+
+
+
 function VirturalDevicePlatform(log, config){
 	this.log = log;
   this.name = config.name;
-  this.devices = config["devices"];
+  this.devices = config["zones"];
   
 }
 
 VirturalDevicePlatform.prototype = {
+	accessories: function(callback){
+		
+		var foundZones = [];
+		var index = 0;
+		var count = this.devices.length;
+
+		for(index=0; index< count; ++index){
+			var zone  = new VirturalDeviceZone(
+				this.log, 
+				this.devices[index]);
+			
+			foundZones.push(zone);
+		}
+		
+		callback(foundZones);
+	}
+};
+
+
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------------------
+
+//VIRTURAL DEVICE ZONE
+
+//---------------------------------------------------------------------------------------
+
+
+
+function VirturalDeviceZone(log, config){
+	this.log = log;
+	this.name = config.name;
+	this.devices = config["accessories"];
+  
+}
+
+VirturalDeviceZone.prototype = {
 	accessories: function(callback){
 		var foundAccessories = [];
 		var index = 0;
@@ -48,6 +108,7 @@ VirturalDevicePlatform.prototype = {
 		callback(foundAccessories);
 	}
 };
+
 
 
 
