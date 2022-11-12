@@ -110,15 +110,15 @@ VirturalDeviceAccessory.prototype.getServices = function() {
 
 VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
 
-  this.log("Setting [Accessory] : " + this.name.replace(/\s/g, '_') + " from " + on + " to " + !on);
+  this.log("Setting [Accessory] : " + this.name.replace(/\s/g, '_') + " from " + !on + " to " + on);
   //this.accessoryacation._setOn2(on);
   this.log("Accessory Action Name : " + this.accessoryaction.name);
   
     this._state = on;
     
     if (this._state != this.accessoryaction._state) {
-      //this.accessoryaction._service.setCharacteristic(Characteristic.On, on);
-      this.log("HIT");
+    this.log("HIT");
+      this.accessoryaction._service.setCharacteristic(Characteristic.On, on);
     }
   
   
@@ -191,7 +191,7 @@ VirturalDeviceAccessoryAction.prototype.getServices = function() {
 VirturalDeviceAccessoryAction.prototype._setOn = function(on, callback) {
 
   if (on && this._state){
-    this.log("Setting [Accessory Action] : " + this.name.replace(/\s/g, '_') + " from " + on + " to " + !on);
+    this.log("Setting [Accessory Action] : " + this.name.replace(/\s/g, '_') + " from " + !on + " to " + on);
     setTimeout(() => {
       this._service.setCharacteristic(Characteristic.On, false)
       }, 100);
@@ -199,7 +199,7 @@ VirturalDeviceAccessoryAction.prototype._setOn = function(on, callback) {
   else {
     this._state = on;
     
-	      this.log("Setting [Accessory Action] : " + this.name.replace(/\s/g, '_') + " from " + on + " to " + !on);
+	      this.log("Setting [Accessory Action] : " + this.name.replace(/\s/g, '_') + " from " + !on + " to " + on);
     this.storage.setItemSync(this.name, on);
     }
 	
