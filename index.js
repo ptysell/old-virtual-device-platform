@@ -119,7 +119,7 @@ VirturalDeviceAccessory.prototype._setOn = function(on, callback) {
 VirturalDeviceAccessory.prototype.setAccessoryAction = function(accessoryaction) {
 	
   this.accessoryaction = accessoryaction;
-  console.log("Set Accessory Action : " + accessoryaction.name);
+  console.log("Set Accessory Action : " + this.name + " : " + accessoryaction.name);
 	
 }
 
